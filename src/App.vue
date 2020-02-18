@@ -3,9 +3,8 @@
     <router-view />
   </div>
 </template>
-
 <style lang="scss">
-#app {}
-
-
+  #app {
+  
+}
 </style>

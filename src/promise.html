@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // //rssolve,reject  ,all,ract
+        // //resolve==tnen  reject==catch
+        // let promise= new Promise((resolve,reject)=>{
+        //     resolve(11111)
+        // })
+        // promise.then(response=>{
+        //     console.log(response)
+        //     console.log('成功')
+        // }).catch(error=>{
+        //     console.log('失败')
+        // })
+
+        //链式
+        function promise1(status){
+           return new Promise((resolve,reject)=>{
+                if(status){
+                    console.log('第一个promise成功')
+                    resolve('第一个promise成功') //axios
+                }
+                if(!status){
+                    console.log('第一个promise失败')
+                    reject('第一个promise失败')
+                }
+           }) 
+        }
+
+        function promise2(status){
+           return new Promise((resolve,reject)=>{
+                if(status){
+                    console.log('第2个promise成功')
+                    resolve('第2个promise成功')
+                }
+                if(!status){
+                    console.log('第2个promise失败')
+                    reject('第2个promise失败')
+                }
+           }) 
+        }
+
+
+        // promise1(true).then(response=>{
+        //     console.log(response)//第一个
+        //     //返回参数看是否执行第二个promise
+        //     return promise2(true)
+        // }).then(response=>{
+        //     console.log(response)//第二个
+        // }).catch(error=>{
+        //     console.log(error) 
+        // })
+            //all方法必须中括号中promise必须全部成功，才执行then回调  有一个不成功就会执行catch
+        // Promise.all([promise1(true),promise2(true)]).then(response=>{
+        //         console.log('全部调用成功')
+        // }).catch(error=>{
+        //     console.log('有些失败')
+        // })
+ //race数组 执行时遇到resolve(成功)  一直执行链式
+ //最终理解：race只要有一个返回resolve，就代表成功 回调then  但是第一个是返回reject 就执行catch
+        Promise.race([promise1(true),promise2(true)]).then(response=>{
+                console.log('全部调用成功')
+        }).catch(error=>{
+            console.log('有些失败')
+        })
+
+
+    </script>
+</body>
+</html>
