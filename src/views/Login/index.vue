@@ -217,11 +217,12 @@ export default {
         code: ruleForm.code,
         module: "login"
       };
-      //登录接口
-      Login(requestData)
-        .then(response => {
+      root.$store.dispatch('app/login',requestData).then(response => {
           console.log("登录成功");
           console.log(response);
+          root.$router.push({
+             name:'Consloe' 
+             })
         })
         .catch(() => {});
     };
